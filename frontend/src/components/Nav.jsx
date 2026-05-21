@@ -29,7 +29,7 @@ export default function Nav() {
           : "bg-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-10 h-[104px] flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-10 h-[80px] sm:h-[96px] lg:h-[104px] flex items-center justify-between">
         <button
           data-testid="nav-logo"
           onClick={() => handleNav("home")}
@@ -38,7 +38,7 @@ export default function Nav() {
           <img
             src={BRAND.logoUrl}
             alt="CLA Aesthetics & Wellness"
-            className="h-[84px] w-[84px] object-contain rounded-full"
+            className="h-[60px] w-[60px] sm:h-[72px] sm:w-[72px] lg:h-[84px] lg:w-[84px] object-contain rounded-full"
           />
         </button>
 

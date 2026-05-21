@@ -12,9 +12,9 @@ export default function Testimonials() {
     <section
       id="testimonials"
       data-testid="testimonials-section"
-      className="relative bg-[#F2E8DF] py-24 lg:py-32 overflow-hidden"
+      className="relative bg-[#F2E8DF] py-20 sm:py-24 lg:py-32 overflow-hidden"
     >
-      <div className="max-w-5xl mx-auto px-6 lg:px-10 text-center">
+      <div className="max-w-5xl mx-auto px-5 sm:px-6 lg:px-10 text-center">
         <div className="reveal flex flex-col items-center">
           <div className="flex items-center gap-3">
             <span className="h-px w-10 bg-[#D4AF37]" />
@@ -23,20 +23,20 @@ export default function Testimonials() {
             </span>
             <span className="h-px w-10 bg-[#D4AF37]" />
           </div>
-          <h2 className="mt-5 font-serif-display font-light text-[40px] md:text-5xl lg:text-[58px] leading-[1.05] tracking-tight text-[#2C2A29]">
+          <h2 className="mt-5 font-serif-display font-light text-[34px] sm:text-[40px] md:text-5xl lg:text-[58px] leading-[1.05] tracking-tight text-[#2C2A29]">
             What our clients{" "}
-            <em className="italic text-[#B8932E]">say</em>.
+            <em className="italic text-shimmer">say</em>.
           </h2>
         </div>
 
-        <div className="mt-14 relative reveal">
+        <div className="mt-12 sm:mt-14 relative reveal">
           <Quote
             className="mx-auto h-9 w-9 text-[#D4AF37]"
             strokeWidth={1.2}
           />
           <p
             data-testid="testimonial-text"
-            className="mt-8 font-serif-display italic text-[24px] md:text-[34px] lg:text-[40px] leading-[1.3] text-[#2C2A29] font-light"
+            className="mt-6 sm:mt-8 font-serif-display italic text-[22px] sm:text-[28px] md:text-[34px] lg:text-[40px] leading-[1.3] text-[#2C2A29] font-light"
           >
             “{t.text}”
           </p>

@@ -86,9 +86,9 @@ export default function Booking() {
     <section
       id="contact"
       data-testid="booking-section"
-      className="relative bg-[#F5F2EA] py-24 lg:py-32"
+      className="relative bg-[#F5F2EA] py-20 sm:py-24 lg:py-32"
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-12 gap-12 lg:gap-16">
+      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-10 grid lg:grid-cols-12 gap-12 lg:gap-16">
         {/* Left column: heading + contact info */}
         <div className="lg:col-span-5 reveal">
           <div className="flex items-center gap-3">
@@ -97,9 +97,9 @@ export default function Booking() {
               Book Your Appointment
             </span>
           </div>
-          <h2 className="mt-5 font-serif-display font-light text-[40px] md:text-5xl lg:text-[58px] leading-[1.05] tracking-tight text-[#2C2A29]">
+          <h2 className="mt-5 font-serif-display font-light text-[34px] sm:text-[40px] md:text-5xl lg:text-[58px] leading-[1.05] tracking-tight text-[#2C2A29]">
             Reserve your{" "}
-            <em className="italic text-[#B8932E]">moment</em>.
+            <em className="italic text-shimmer">moment</em>.
           </h2>
           <p className="mt-6 text-[15px] md:text-[17px] leading-relaxed text-[#5C5A59] font-light max-w-md">
             Tell us a little about your visit. We'll personally confirm your
@@ -229,7 +229,7 @@ export default function Booking() {
         <form
           onSubmit={onSubmit}
           data-testid="booking-form"
-          className="lg:col-span-7 relative rounded-[28px] bg-white border border-[#E5E1D8] p-7 md:p-10 shadow-[0_30px_80px_-50px_rgba(44,42,41,0.25)] reveal"
+          className="lg:col-span-7 relative rounded-[24px] sm:rounded-[28px] bg-white border border-[#E5E1D8] p-5 sm:p-7 md:p-10 shadow-[0_30px_80px_-50px_rgba(44,42,41,0.25)] reveal"
         >
           <div className="grid sm:grid-cols-2 gap-5">
             <Field label="Full name" htmlFor="bk-name" required>

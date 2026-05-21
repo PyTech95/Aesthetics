@@ -27,9 +27,9 @@ export default function About() {
     <section
       id="about"
       data-testid="about-section"
-      className="relative bg-[#FAF9F6] py-24 lg:py-32"
+      className="relative bg-[#FAF9F6] py-20 sm:py-24 lg:py-32"
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-12 gap-14 lg:gap-20 items-center">
+      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-10 grid lg:grid-cols-12 gap-12 lg:gap-20 items-center">
         {/* Image side */}
         <div className="lg:col-span-5 reveal">
           <div className="relative">
@@ -64,9 +64,9 @@ export default function About() {
               About CLA
             </span>
           </div>
-          <h2 className="font-serif-display font-light text-[40px] md:text-5xl lg:text-[58px] leading-[1.05] tracking-tight text-[#2C2A29] mt-5">
+          <h2 className="font-serif-display font-light text-[34px] sm:text-[40px] md:text-5xl lg:text-[58px] leading-[1.05] tracking-tight text-[#2C2A29] mt-5">
             A quiet sanctuary, devoted to{" "}
-            <em className="italic text-[#B8932E]">visible care</em>.
+            <em className="italic text-shimmer">visible care</em>.
           </h2>
           <p className="mt-7 text-[15px] md:text-[17px] leading-relaxed text-[#5C5A59] font-light max-w-2xl">
             CLA Aesthetics & Wellness was born from a simple belief: how you

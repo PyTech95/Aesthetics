@@ -20,9 +20,9 @@ export default function Services() {
     <section
       id="services"
       data-testid="services-section"
-      className="relative bg-[#F5F2EA] py-24 lg:py-32 overflow-hidden"
+      className="relative bg-[#F5F2EA] py-20 sm:py-24 lg:py-32 overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-10">
+      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-10">
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 reveal">
           <div className="max-w-3xl">
             <div className="flex items-center gap-3">
@@ -31,9 +31,9 @@ export default function Services() {
                 Signature Menu
               </span>
             </div>
-            <h2 className="mt-5 font-serif-display font-light text-[40px] md:text-5xl lg:text-[58px] leading-[1.05] tracking-tight text-[#2C2A29]">
+            <h2 className="mt-5 font-serif-display font-light text-[34px] sm:text-[40px] md:text-5xl lg:text-[58px] leading-[1.05] tracking-tight text-[#2C2A29]">
               Our signature{" "}
-              <em className="italic text-[#B8932E]">services</em>.
+              <em className="italic text-shimmer">services</em>.
             </h2>
             <p className="mt-6 text-[15px] md:text-[17px] leading-relaxed text-[#5C5A59] font-light">
               A curated menu of rituals, refined treatments and quietly powerful
