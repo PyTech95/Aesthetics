@@ -1,0 +1,88 @@
+{
+  "project_name": "CLA Aesthetics & Wellness",
+  "theme": "light",
+  "archetype": "Organic & Earthy",
+  "domain": "Spa, Aesthetics, Wellness",
+  "brand_colors": {
+    "background": "#FAF9F6",
+    "surface": "#F5F2EA",
+    "surface_glass": "rgba(250, 249, 246, 0.75)",
+    "primary": "#D4AF37",
+    "primary_hover": "#C5A059",
+    "secondary": "#E5D8CD",
+    "text_main": "#2C2A29",
+    "text_muted": "#5C5A59",
+    "border": "#E5E1D8",
+    "accent_gold": "#D4AF37",
+    "accent_champagne": "#F2E8DF"
+  },
+  "typography": {
+    "heading_font": "Cormorant Garamond",
+    "body_font": "Outfit",
+    "rules": {
+      "h1": "text-5xl md:text-6xl lg:text-7xl font-light tracking-tight text-[#2C2A29]",
+      "h2": "text-4xl md:text-5xl font-light tracking-tight text-[#2C2A29]",
+      "h3": "text-2xl md:text-3xl font-medium text-[#2C2A29]",
+      "body": "text-base md:text-lg font-light leading-relaxed text-[#5C5A59]",
+      "label": "text-xs md:text-sm uppercase tracking-[0.2em] font-medium text-[#D4AF37]"
+    }
+  },
+  "layout_and_spacing": {
+    "general": "Generous spacing. Sections should use py-24 or py-32. Containers max-w-7xl.",
+    "bento_grid": "Use asymmetrical bento grids for Services and Portfolio. Mix large feature cards with smaller secondary cards.",
+    "borders": "Soft, subtle borders (border-[#E5E1D8]) with rounded-2xl or rounded-3xl corners.",
+    "shadows": "Very soft ambient shadows: shadow-[0_8px_30px_rgba(44,42,41,0.04)]."
+  },
+  "components": {
+    "nav_header": "Sticky nav, crystal glassmorphism (backdrop-blur-xl bg-[#FAF9F6]/80 border-b border-[#E5E1D8]/50). Logo on left, links and gold CTA on right.",
+    "hero": "Full height or min-h-[90vh]. Background image with a warm gradient overlay (bg-gradient-to-r from-[#FAF9F6]/90 to-[#FAF9F6]/20). Show '안녕하세요' (Korean hello) as a small elegant badge above the H1.",
+    "services_cards": "Minimalist cards, rounded-2xl, bg-[#F5F2EA] or white. Soft hover effect (translate-y-[-4px] and slightly stronger shadow).",
+    "buttons": "Primary: Solid gold (bg-[#D4AF37] text-white) with soft glow. Secondary: Outline gold (border-[#D4AF37] text-[#D4AF37]). Rounded-full for organic feel.",
+    "booking_form": "Clean Shadcn inputs customized with border-[#E5E1D8] and focus:ring-[#D4AF37]. Use select for service type, native date/time for simplicity if Shadcn calendar is heavy, but Shadcn is preferred."
+  },
+  "media": {
+    "logo": {
+      "url": "https://customer-assets.emergentagent.com/job_21fa9d9f-67b4-4058-a89a-ebf3ae7dfc46/artifacts/3agixcxs_IG.png",
+      "description": "CLA Aesthetics & Wellness Main Logo (Gold laurel wreath)"
+    },
+    "hero_bg": {
+      "url": "https://static.prod-images.emergentagent.com/jobs/21fa9d9f-67b4-4058-a89a-ebf3ae7dfc46/images/ecdfcc126cf7fb62c42b8576ebf029c48b4845c0241290f67ad3781659f042ae.png",
+      "description": "High-end editorial photograph of a serene spa treatment room, golden light."
+    },
+    "texture_bg": {
+      "url": "https://static.prod-images.emergentagent.com/jobs/21fa9d9f-67b4-4058-a89a-ebf3ae7dfc46/images/8b0d62c3e4a5519b267b93c999823946261b07ad8a741b27336d94f184e5ec3b.png",
+      "description": "Abstract texture of ivory silk and warm beige stones for section backgrounds."
+    },
+    "gallery": [
+      {
+        "url": "https://images.pexels.com/photos/37229288/pexels-photo-37229288.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "description": "Close up facial massage"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1757689373248-a6cd07328ba5?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Njl8MHwxfHNlYXJjaHwyfHxzcGElMjBmYWNpYWwlMjBtYXNzYWdlJTIwd2FybXxlbnwwfHx8fDE3NzkzNDA1Mjd8MA&ixlib=rb-4.1.0&q=85",
+        "description": "Spa treatment towel covering face"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1759169277632-e5052b6d3e01?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjY2NjV8MHwxfHNlYXJjaHwyfHxzcGElMjBjYW5kbGVzJTIwbmF0dXJhbCUyMHRleHR1cmVzfGVufDB8fHx8MTc3OTM0MDUyN3ww&ixlib=rb-4.1.0&q=85",
+        "description": "Spa candles natural textures"
+      }
+    ]
+  },
+  "business_details": {
+    "phone": "516-620-9158",
+    "address": "1078 Grand Avenue, South Hempstead NY 11550",
+    "email": "cinthia@claaesthetics.com",
+    "founder": "Cinthia Lariviere Alexandre, Founder & CEO"
+  },
+  "instructions_to_main_agent": [
+    "Install and use Cormorant Garamond and Outfit fonts from Google Fonts.",
+    "Build a single-page site with smooth scrolling (react-scroll or standard anchor links).",
+    "Ensure the hero section uses the hero_bg image with a delicate gradient overlay, placing the '안녕하세요' badge and H1 prominently.",
+    "Create an 'About' section focusing on the founder with a portrait placeholder or texture image if no portrait is provided.",
+    "Implement a bento grid or masonry layout for the Services and Portfolio sections. Use the provided gallery images.",
+    "Build a sophisticated booking form with Shadcn components (inputs, select, date picker).",
+    "Add 'data-testid' to all interactive elements for testing.",
+    "Maintain a highly spacious, low-contrast UI. Never use pure black or neon colors.",
+    "Use Lucide React for elegant, thin-line icons (strokeWidth={1.5})."
+  ]
+}
