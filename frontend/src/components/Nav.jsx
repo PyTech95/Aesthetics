@@ -1,0 +1,141 @@
+import { useEffect, useState } from "react";
+import { Menu, X } from "lucide-react";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { BRAND, NAV_LINKS } from "@/lib/content";
+import { scrollToId } from "@/lib/hooks";
+
+export default function Nav() {
+  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const handleNav = (id) => {
+    setOpen(false);
+    scrollToId(id);
+  };
+
+  return (
+    <header
+      data-testid="site-nav"
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
+        scrolled
+          ? "backdrop-blur-xl bg-[#FAF9F6]/85 border-b border-[#E5E1D8]/80"
+          : "bg-transparent"
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-6 lg:px-10 h-[72px] flex items-center justify-between">
+        <button
+          data-testid="nav-logo"
+          onClick={() => handleNav("home")}
+          className="flex items-center gap-3"
+        >
+          <img
+            src={BRAND.logoUrl}
+            alt="CLA Aesthetics & Wellness"
+            className="h-10 w-10 object-contain"
+          />
+          <div className="hidden sm:flex flex-col leading-tight text-left">
+            <span className="font-serif-display text-[15px] tracking-wide text-[#2C2A29]">
+              CLA Aesthetics
+            </span>
+            <span className="text-[10px] uppercase tracking-[0.28em] text-[#D4AF37]">
+              & Wellness
+            </span>
+          </div>
+        </button>
+
+        <nav className="hidden md:flex items-center gap-9">
+          {NAV_LINKS.map((l) => (
+            <button
+              key={l.id}
+              data-testid={`nav-link-${l.id}`}
+              onClick={() => handleNav(l.id)}
+              className="text-[13px] tracking-[0.14em] uppercase text-[#5C5A59] hover:text-[#2C2A29] transition-colors"
+            >
+              {l.label}
+            </button>
+          ))}
+        </nav>
+
+        <div className="hidden md:block">
+          <button
+            data-testid="nav-book-now"
+            onClick={() => handleNav("contact")}
+            className="group relative inline-flex items-center gap-2 rounded-full bg-[#2C2A29] text-white px-6 py-3 text-[12px] tracking-[0.22em] uppercase transition-all hover:bg-[#D4AF37] hover:shadow-[0_18px_40px_-18px_rgba(212,175,55,0.7)]"
+          >
+            <span>Book Now</span>
+            <span className="h-1.5 w-1.5 rounded-full bg-[#D4AF37] group-hover:bg-white transition-colors" />
+          </button>
+        </div>
+
+        <div className="md:hidden">
+          <Sheet open={open} onOpenChange={setOpen}>
+            <SheetTrigger asChild>
+              <button
+                data-testid="mobile-menu-trigger"
+                aria-label="Open menu"
+                className="h-11 w-11 grid place-items-center rounded-full border border-[#E5E1D8] bg-white/70 backdrop-blur"
+              >
+                <Menu className="h-5 w-5 text-[#2C2A29]" strokeWidth={1.5} />
+              </button>
+            </SheetTrigger>
+            <SheetContent
+              side="right"
+              className="bg-[#FAF9F6] border-l border-[#E5E1D8] w-[88%] sm:w-[420px] p-0"
+            >
+              <div className="h-full flex flex-col p-8">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <img
+                      src={BRAND.logoUrl}
+                      alt="CLA"
+                      className="h-9 w-9 object-contain"
+                    />
+                    <span className="font-serif-display text-[16px] text-[#2C2A29]">
+                      CLA Aesthetics
+                    </span>
+                  </div>
+                  <button
+                    aria-label="Close menu"
+                    data-testid="mobile-menu-close"
+                    onClick={() => setOpen(false)}
+                    className="h-10 w-10 grid place-items-center rounded-full border border-[#E5E1D8]"
+                  >
+                    <X className="h-4 w-4" strokeWidth={1.5} />
+                  </button>
+                </div>
+
+                <div className="mt-12 flex-1 flex flex-col gap-6">
+                  {NAV_LINKS.map((l) => (
+                    <button
+                      key={l.id}
+                      data-testid={`mobile-nav-link-${l.id}`}
+                      onClick={() => handleNav(l.id)}
+                      className="text-left font-serif-display text-3xl text-[#2C2A29]"
+                    >
+                      {l.label}
+                    </button>
+                  ))}
+                </div>
+
+                <button
+                  data-testid="mobile-book-now"
+                  onClick={() => handleNav("contact")}
+                  className="w-full rounded-full bg-[#D4AF37] text-white py-4 text-[12px] tracking-[0.25em] uppercase"
+                >
+                  Book Your Session
+                </button>
+              </div>
+            </SheetContent>
+          </Sheet>
+        </div>
+      </div>
+    </header>
+  );
+}
