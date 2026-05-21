@@ -33,21 +33,14 @@ export default function Nav() {
         <button
           data-testid="nav-logo"
           onClick={() => handleNav("home")}
-          className="flex items-center gap-3"
+          className="flex items-center"
         >
           <img
             src={BRAND.logoUrl}
             alt="CLA Aesthetics & Wellness"
-            className="h-10 w-10 object-contain"
+            className="h-16 w-16 object-contain"
+            style={{ mixBlendMode: "multiply" }}
           />
-          <div className="hidden sm:flex flex-col leading-tight text-left">
-            <span className="font-serif-display text-[15px] tracking-wide text-[#2C2A29]">
-              CLA Aesthetics
-            </span>
-            <span className="text-[10px] uppercase tracking-[0.28em] text-[#D4AF37]">
-              & Wellness
-            </span>
-          </div>
         </button>
 
         <nav className="hidden md:flex items-center gap-9">
@@ -95,16 +88,12 @@ export default function Nav() {
                   Browse sections of the CLA Aesthetics & Wellness site.
                 </SheetDescription>
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <img
-                      src={BRAND.logoUrl}
-                      alt="CLA"
-                      className="h-9 w-9 object-contain"
-                    />
-                    <span className="font-serif-display text-[16px] text-[#2C2A29]">
-                      CLA Aesthetics
-                    </span>
-                  </div>
+                  <img
+                    src={BRAND.logoUrl}
+                    alt="CLA"
+                    className="h-14 w-14 object-contain"
+                    style={{ mixBlendMode: "multiply" }}
+                  />
                   <button
                     aria-label="Close menu"
                     data-testid="mobile-menu-close"
