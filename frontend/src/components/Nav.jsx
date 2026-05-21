@@ -29,7 +29,7 @@ export default function Nav() {
           : "bg-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-10 h-[72px] flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-6 lg:px-10 h-[104px] flex items-center justify-between">
         <button
           data-testid="nav-logo"
           onClick={() => handleNav("home")}
@@ -38,8 +38,7 @@ export default function Nav() {
           <img
             src={BRAND.logoUrl}
             alt="CLA Aesthetics & Wellness"
-            className="h-16 w-16 object-contain"
-            style={{ mixBlendMode: "multiply" }}
+            className="h-[84px] w-[84px] object-contain rounded-full"
           />
         </button>
 
@@ -91,8 +90,7 @@ export default function Nav() {
                   <img
                     src={BRAND.logoUrl}
                     alt="CLA"
-                    className="h-14 w-14 object-contain"
-                    style={{ mixBlendMode: "multiply" }}
+                    className="h-[72px] w-[72px] object-contain rounded-full"
                   />
                   <button
                     aria-label="Close menu"

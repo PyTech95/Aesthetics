@@ -20,7 +20,7 @@ export const BRAND = {
   },
   bookingExternalUrl: "", // Add Calendly/Square link here when ready
   logoUrl:
-    "https://customer-assets.emergentagent.com/job_21fa9d9f-67b4-4058-a89a-ebf3ae7dfc46/artifacts/3agixcxs_IG.png",
+    "https://customer-assets.emergentagent.com/job_luxury-spa-preview-1/artifacts/juptw2af_ChatGPT%20Image%20May%2021%2C%202026%2C%2002_09_08%20PM.png",
 };
 
 export const NAV_LINKS = [
