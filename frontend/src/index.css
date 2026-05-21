@@ -90,6 +90,27 @@ body {
   transform: translateY(0);
 }
 
+/* Stagger reveal (children animate sequentially when parent is visible) */
+.stagger > * {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 700ms cubic-bezier(.2,.7,.2,1), transform 700ms cubic-bezier(.2,.7,.2,1);
+}
+.stagger.is-visible > * { opacity: 1; transform: translateY(0); }
+.stagger.is-visible > *:nth-child(1) { transition-delay: 60ms; }
+.stagger.is-visible > *:nth-child(2) { transition-delay: 180ms; }
+.stagger.is-visible > *:nth-child(3) { transition-delay: 300ms; }
+.stagger.is-visible > *:nth-child(4) { transition-delay: 420ms; }
+.stagger.is-visible > *:nth-child(5) { transition-delay: 540ms; }
+.stagger.is-visible > *:nth-child(6) { transition-delay: 660ms; }
+
+/* Soft floating animation */
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.animate-float { animation: floatY 6s ease-in-out infinite; }
+
 /* Gold underline accent */
 .gold-rule {
   width: 56px;

@@ -1,29 +1,40 @@
+import { useEffect, useState } from "react";
 import { ArrowRight, Star } from "lucide-react";
 import { scrollToId } from "@/lib/hooks";
 import { BRAND } from "@/lib/content";
+import AnimatedCounter from "@/components/AnimatedCounter";
 
 const HERO_BG =
   "https://static.prod-images.emergentagent.com/jobs/21fa9d9f-67b4-4058-a89a-ebf3ae7dfc46/images/ecdfcc126cf7fb62c42b8576ebf029c48b4845c0241290f67ad3781659f042ae.png";
 
 export default function Hero() {
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const onScroll = () => setScrollY(window.scrollY);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <section
       id="home"
       data-testid="hero-section"
       className="relative min-h-[100svh] w-full overflow-hidden bg-[#FAF9F6]"
     >
-      {/* Background image right side */}
+      {/* Background image right side with subtle parallax */}
       <div className="absolute inset-0">
         <img
           src={HERO_BG}
           alt=""
-          className="absolute inset-0 h-full w-full object-cover object-center"
+          className="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-100"
+          style={{ transform: `translateY(${scrollY * 0.18}px) scale(1.06)` }}
         />
         <div className="absolute inset-0 hero-overlay" />
       </div>
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-10 pt-[120px] lg:pt-[140px] pb-24 lg:pb-32 grid lg:grid-cols-12 gap-10 items-center min-h-[100svh]">
-        <div className="lg:col-span-7 flex flex-col">
+        <div className="lg:col-span-7 flex flex-col stagger">
           <h1
             data-testid="hero-headline"
             className="font-serif-display text-[44px] sm:text-6xl lg:text-[80px] leading-[1.02] tracking-tight text-[#2C2A29] font-light"
@@ -43,9 +54,10 @@ export default function Hero() {
             <button
               data-testid="hero-cta-book"
               onClick={() => scrollToId("contact")}
-              className="inline-flex items-center gap-3 rounded-full bg-[#2C2A29] text-white px-8 py-4 text-[12px] uppercase tracking-[0.24em] hover:bg-[#D4AF37] transition-colors duration-500"
+              className="group inline-flex items-center gap-3 rounded-full bg-[#2C2A29] text-white px-8 py-4 text-[12px] uppercase tracking-[0.24em] hover:bg-[#D4AF37] transition-colors duration-500"
             >
-              Book your session <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
+              Book your session
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" strokeWidth={1.5} />
             </button>
             <button
               data-testid="hero-cta-services"
@@ -67,7 +79,13 @@ export default function Hero() {
                 />
               ))}
               <span className="ml-2 text-[12px] uppercase tracking-[0.2em] text-[#5C5A59]">
-                5-star rated by 200+ clients
+                5-star rated by{" "}
+                <AnimatedCounter
+                  end={200}
+                  suffix="+"
+                  className="font-serif-display text-[#2C2A29] text-[15px] normal-case"
+                />{" "}
+                clients
               </span>
             </div>
             <div className="h-4 w-px bg-[#E5E1D8] hidden sm:block" />
@@ -78,8 +96,7 @@ export default function Hero() {
         </div>
 
         <div className="lg:col-span-5 hidden lg:flex justify-end">
-          {/* Decorative emblem card */}
-          <div className="relative w-[360px] aspect-[3/4] rounded-3xl overflow-hidden border border-[#E5E1D8] bg-white/40 backdrop-blur-md shadow-[0_30px_80px_-40px_rgba(44,42,41,0.25)]">
+          <div className="relative w-[360px] aspect-[3/4] rounded-3xl overflow-hidden border border-[#E5E1D8] bg-white/40 backdrop-blur-md shadow-[0_30px_80px_-40px_rgba(44,42,41,0.25)] animate-float">
             <img
               src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=900&q=80"
               alt="Spa candles"

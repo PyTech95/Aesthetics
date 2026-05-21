@@ -7,6 +7,7 @@ import Testimonials from "@/components/Testimonials";
 import Offers from "@/components/Offers";
 import Booking from "@/components/Booking";
 import Footer from "@/components/Footer";
+import ChatWidget from "@/components/ChatWidget";
 import { useReveal } from "@/lib/hooks";
 
 export default function Home() {
@@ -24,6 +25,7 @@ export default function Home() {
         <Booking />
       </main>
       <Footer />
+      <ChatWidget />
     </div>
   );
 }

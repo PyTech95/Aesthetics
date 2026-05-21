@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { format } from "date-fns";
 import { toast } from "sonner";
-import { ArrowLeft, RefreshCcw } from "lucide-react";
+import { ArrowLeft, RefreshCcw, MessageCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import {
   Table,
@@ -19,6 +19,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -34,16 +35,21 @@ const STATUS_COLORS = {
 
 export default function Admin() {
   const [bookings, setBookings] = useState([]);
+  const [leads, setLeads] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState("all");
 
   const load = async () => {
     setLoading(true);
     try {
-      const res = await axios.get(`${API}/bookings`);
-      setBookings(res.data || []);
+      const [bRes, lRes] = await Promise.all([
+        axios.get(`${API}/bookings`),
+        axios.get(`${API}/leads`),
+      ]);
+      setBookings(bRes.data || []);
+      setLeads(lRes.data || []);
     } catch (e) {
-      toast.error("Failed to load bookings");
+      toast.error("Failed to load data");
     } finally {
       setLoading(false);
     }
@@ -103,37 +109,59 @@ export default function Admin() {
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
           <div>
             <h1 className="font-serif-display text-4xl md:text-5xl text-[#2C2A29] font-light">
-              Booking requests
+              Studio dashboard
             </h1>
             <p className="mt-2 text-[14px] text-[#5C5A59]">
-              {bookings.length} total · {counts.new || 0} new · {counts.confirmed || 0} confirmed
+              {bookings.length} bookings · {leads.length} concierge leads · {counts.new || 0} new bookings
             </p>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <span className="text-[11px] uppercase tracking-[0.24em] text-[#5C5A59]">
-              Filter
-            </span>
-            <Select value={filter} onValueChange={setFilter}>
-              <SelectTrigger
-                data-testid="admin-filter"
-                className="w-[180px] bg-white border-[#E5E1D8] h-11"
-              >
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All</SelectItem>
-                <SelectItem value="new">New</SelectItem>
-                <SelectItem value="contacted">Contacted</SelectItem>
-                <SelectItem value="confirmed">Confirmed</SelectItem>
-                <SelectItem value="completed">Completed</SelectItem>
-                <SelectItem value="cancelled">Cancelled</SelectItem>
-              </SelectContent>
-            </Select>
           </div>
         </div>
 
-        <div className="mt-10 rounded-2xl border border-[#E5E1D8] bg-white overflow-hidden">
+        <Tabs defaultValue="bookings" className="mt-10">
+          <TabsList className="bg-white border border-[#E5E1D8] p-1 rounded-full">
+            <TabsTrigger
+              value="bookings"
+              data-testid="admin-tab-bookings"
+              className="rounded-full data-[state=active]:bg-[#2C2A29] data-[state=active]:text-white px-5 py-2 text-[12px] uppercase tracking-[0.22em]"
+            >
+              Bookings ({bookings.length})
+            </TabsTrigger>
+            <TabsTrigger
+              value="leads"
+              data-testid="admin-tab-leads"
+              className="rounded-full data-[state=active]:bg-[#2C2A29] data-[state=active]:text-white px-5 py-2 text-[12px] uppercase tracking-[0.22em]"
+            >
+              <MessageCircle className="h-3.5 w-3.5 mr-1.5" strokeWidth={1.5} />
+              Leads ({leads.length})
+            </TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="bookings" className="mt-6">
+            <div className="flex justify-end mb-4">
+              <div className="flex items-center gap-3">
+                <span className="text-[11px] uppercase tracking-[0.24em] text-[#5C5A59]">
+                  Filter
+                </span>
+                <Select value={filter} onValueChange={setFilter}>
+                  <SelectTrigger
+                    data-testid="admin-filter"
+                    className="w-[180px] bg-white border-[#E5E1D8] h-11"
+                  >
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All</SelectItem>
+                    <SelectItem value="new">New</SelectItem>
+                    <SelectItem value="contacted">Contacted</SelectItem>
+                    <SelectItem value="confirmed">Confirmed</SelectItem>
+                    <SelectItem value="completed">Completed</SelectItem>
+                    <SelectItem value="cancelled">Cancelled</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+
+            <div className="rounded-2xl border border-[#E5E1D8] bg-white overflow-hidden">
           <Table data-testid="admin-bookings-table">
             <TableHeader>
               <TableRow className="bg-[#F5F2EA] hover:bg-[#F5F2EA]">
@@ -236,7 +264,80 @@ export default function Admin() {
                 ))}
             </TableBody>
           </Table>
-        </div>
+            </div>
+          </TabsContent>
+
+          <TabsContent value="leads" className="mt-6">
+            <div className="rounded-2xl border border-[#E5E1D8] bg-white overflow-hidden">
+              <Table data-testid="admin-leads-table">
+                <TableHeader>
+                  <TableRow className="bg-[#F5F2EA] hover:bg-[#F5F2EA]">
+                    <TableHead>Name</TableHead>
+                    <TableHead>Phone</TableHead>
+                    <TableHead>Interest</TableHead>
+                    <TableHead>Channel</TableHead>
+                    <TableHead>Source</TableHead>
+                    <TableHead>Received</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {loading && (
+                    <TableRow>
+                      <TableCell colSpan={6} className="py-10 text-center text-[#5C5A59]">
+                        Loading…
+                      </TableCell>
+                    </TableRow>
+                  )}
+                  {!loading && leads.length === 0 && (
+                    <TableRow>
+                      <TableCell colSpan={6} className="py-12 text-center text-[#5C5A59]">
+                        No leads yet. The AI concierge will save them here.
+                      </TableCell>
+                    </TableRow>
+                  )}
+                  {!loading &&
+                    leads.map((l) => (
+                      <TableRow key={l.id} data-testid={`admin-lead-row-${l.id}`}>
+                        <TableCell>
+                          <p className="font-serif-display text-lg text-[#2C2A29]">
+                            {l.name}
+                          </p>
+                        </TableCell>
+                        <TableCell>
+                          <a
+                            href={`tel:${l.phone}`}
+                            className="text-[14px] text-[#2C2A29] hover:text-[#B8932E]"
+                          >
+                            {l.phone}
+                          </a>
+                        </TableCell>
+                        <TableCell className="text-[13px] text-[#5C5A59] max-w-xs">
+                          {l.interest || "—"}
+                        </TableCell>
+                        <TableCell>
+                          <Badge className="uppercase tracking-[0.18em] text-[10px] px-2.5 py-1 bg-[#F2E8DF] text-[#B8932E]">
+                            {l.preferred_channel}
+                          </Badge>
+                        </TableCell>
+                        <TableCell className="text-[12px] text-[#5C5A59]">
+                          {l.source}
+                        </TableCell>
+                        <TableCell className="text-[12px] text-[#5C5A59]">
+                          {(() => {
+                            try {
+                              return format(new Date(l.created_at), "MMM d, h:mm a");
+                            } catch {
+                              return l.created_at;
+                            }
+                          })()}
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                </TableBody>
+              </Table>
+            </div>
+          </TabsContent>
+        </Tabs>
       </main>
     </div>
   );
