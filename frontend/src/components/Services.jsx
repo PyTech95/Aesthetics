@@ -4,7 +4,7 @@ import { scrollToId } from "@/lib/hooks";
 
 const CATEGORY_IMG = {
   Facials:
-    "https://images.unsplash.com/photo-1570194065650-d99fb4bedf0a?auto=format&fit=crop&w=900&q=80",
+    "https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&w=1200&q=80",
   "Advanced Skin":
     "https://images.unsplash.com/photo-1631730486572-226d1f595b68?auto=format&fit=crop&w=900&q=80",
   "Body Treatments":

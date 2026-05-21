@@ -92,7 +92,7 @@ export const SERVICES = [
 
 export const GALLERY = [
   {
-    url: "https://images.unsplash.com/photo-1620735692151-c531dc52a3a1?auto=format&fit=crop&w=1200&q=80",
+    url: "https://images.unsplash.com/photo-1600334129128-685c5582fd35?auto=format&fit=crop&w=1200&q=80",
     caption: "Treatment ritual",
     span: "lg:col-span-2 lg:row-span-2",
   },

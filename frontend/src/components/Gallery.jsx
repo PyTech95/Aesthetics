@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Expand } from "lucide-react";
 import { GALLERY } from "@/lib/content";
 
@@ -64,6 +64,10 @@ export default function Gallery() {
         >
           {active && (
             <div className="relative">
+              <DialogTitle className="sr-only">{active.caption}</DialogTitle>
+              <DialogDescription className="sr-only">
+                Enlarged gallery image: {active.caption}
+              </DialogDescription>
               <img
                 src={active.url}
                 alt={active.caption}

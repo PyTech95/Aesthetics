@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 import { BRAND, NAV_LINKS } from "@/lib/content";
 import { scrollToId } from "@/lib/hooks";
 
@@ -90,6 +90,10 @@ export default function Nav() {
               className="bg-[#FAF9F6] border-l border-[#E5E1D8] w-[88%] sm:w-[420px] p-0"
             >
               <div className="h-full flex flex-col p-8">
+                <SheetTitle className="sr-only">Navigation menu</SheetTitle>
+                <SheetDescription className="sr-only">
+                  Browse sections of the CLA Aesthetics & Wellness site.
+                </SheetDescription>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <img
