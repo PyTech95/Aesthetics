@@ -24,22 +24,9 @@ export default function Hero() {
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-10 pt-[120px] lg:pt-[140px] pb-24 lg:pb-32 grid lg:grid-cols-12 gap-10 items-center min-h-[100svh]">
         <div className="lg:col-span-7 flex flex-col">
-          {/* Korean greeting badge */}
-          <div
-            data-testid="hero-greeting"
-            className="inline-flex w-fit items-center gap-3 rounded-full border border-[#E5E1D8] bg-white/80 backdrop-blur pl-2 pr-5 py-1.5"
-          >
-            <span className="grid place-items-center h-7 w-7 rounded-full bg-[#D4AF37] text-white text-[11px] font-medium">
-              안
-            </span>
-            <span className="text-[12px] tracking-[0.28em] uppercase text-[#5C5A59]">
-              안녕하세요 — Welcome to CLA
-            </span>
-          </div>
-
           <h1
             data-testid="hero-headline"
-            className="font-serif-display text-[44px] sm:text-6xl lg:text-[80px] leading-[1.02] tracking-tight text-[#2C2A29] mt-8 font-light"
+            className="font-serif-display text-[44px] sm:text-6xl lg:text-[80px] leading-[1.02] tracking-tight text-[#2C2A29] font-light"
           >
             Elevate your <em className="italic text-[#B8932E]">glow.</em>
             <br />
