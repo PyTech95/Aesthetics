@@ -52,6 +52,16 @@ export default function ChatWidget() {
     return () => clearTimeout(t);
   }, []);
 
+  // Auto-open chat after 10 seconds (once per session)
+  useEffect(() => {
+    if (sessionStorage.getItem("cla_chat_auto_opened")) return;
+    const t = setTimeout(() => {
+      setOpen(true);
+      sessionStorage.setItem("cla_chat_auto_opened", "1");
+    }, 10000);
+    return () => clearTimeout(t);
+  }, []);
+
   useEffect(() => {
     if (!scrollerRef.current) return;
     scrollerRef.current.scrollTop = scrollerRef.current.scrollHeight;
