@@ -1,0 +1,38 @@
+{
+  "name": "CLA Aesthetics & Wellness",
+  "short_name": "CLA Aesthetics",
+  "description": "Luxury aesthetics & wellness studio in South Hempstead, NY. Book your treatment, manage your visits, and connect with our concierge — anywhere.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FAF9F6",
+  "theme_color": "#2C2A29",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "https://customer-assets.emergentagent.com/job_luxury-spa-preview-1/artifacts/juptw2af_ChatGPT%20Image%20May%2021%2C%202026%2C%2002_09_08%20PM.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://customer-assets.emergentagent.com/job_luxury-spa-preview-1/artifacts/juptw2af_ChatGPT%20Image%20May%2021%2C%202026%2C%2002_09_08%20PM.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["beauty", "lifestyle", "health"],
+  "shortcuts": [
+    {
+      "name": "Book a treatment",
+      "short_name": "Book",
+      "url": "/#contact"
+    },
+    {
+      "name": "My portal",
+      "short_name": "Portal",
+      "url": "/portal"
+    }
+  ]
+}

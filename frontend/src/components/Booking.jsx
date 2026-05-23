@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "sonner";
-import { format } from "date-fns";
+import { format, parseISO } from "date-fns";
 import { Calendar as CalendarIcon, Phone, Mail, MapPin, Clock, Instagram, MessageCircle, ArrowRight } from "lucide-react";
 import {
   Select,
@@ -17,6 +17,8 @@ import {
 } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
 import { BRAND, SERVICES } from "@/lib/content";
+import { useAuth } from "@/contexts/AuthContext";
+import QRBookCard from "@/components/QRBookCard";
 
 const TIME_SLOTS = [
   "10:00 AM",
@@ -32,6 +34,7 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
 export default function Booking() {
+  const { user } = useAuth();
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -42,6 +45,37 @@ export default function Booking() {
   const [date, setDate] = useState(null);
   const [time, setTime] = useState("");
   const [submitting, setSubmitting] = useState(false);
+
+  // Auto-fill name/email/phone when client is logged in
+  useEffect(() => {
+    if (user && typeof user === "object") {
+      setForm((f) => ({
+        ...f,
+        name: f.name || user.name || "",
+        email: f.email || user.email || "",
+        phone: f.phone || user.phone || "",
+      }));
+    }
+  }, [user]);
+
+  // Listen for prefill from availability calendar
+  useEffect(() => {
+    const applyPrefill = () => {
+      try {
+        const raw = sessionStorage.getItem("cla_prefill");
+        if (!raw) return;
+        const { date: d, time: t } = JSON.parse(raw);
+        if (d) setDate(parseISO(d));
+        if (t) setTime(t);
+        sessionStorage.removeItem("cla_prefill");
+      } catch {
+        /* ignore */
+      }
+    };
+    applyPrefill();
+    window.addEventListener("cla:prefill", applyPrefill);
+    return () => window.removeEventListener("cla:prefill", applyPrefill);
+  }, []);
 
   const update = (k, v) => setForm((f) => ({ ...f, [k]: v }));
 
@@ -222,6 +256,11 @@ export default function Booking() {
               loading="lazy"
               style={{ border: 0 }}
             />
+          </div>
+
+          {/* QR scan to book */}
+          <div className="mt-6">
+            <QRBookCard />
           </div>
         </div>
 

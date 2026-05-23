@@ -6,10 +6,12 @@ import Services from "@/components/Services";
 import Gallery from "@/components/Gallery";
 import Testimonials from "@/components/Testimonials";
 import Offers from "@/components/Offers";
+import AvailabilityCalendar from "@/components/AvailabilityCalendar";
 import Booking from "@/components/Booking";
 import Footer from "@/components/Footer";
 import ChatWidget from "@/components/ChatWidget";
 import ScrollProgress from "@/components/ScrollProgress";
+import PWAInstallPrompt from "@/components/PWAInstallPrompt";
 import { useReveal } from "@/lib/hooks";
 
 export default function Home() {
@@ -26,10 +28,12 @@ export default function Home() {
         <Gallery />
         <Testimonials />
         <Offers />
+        <AvailabilityCalendar />
         <Booking />
       </main>
       <Footer />
       <ChatWidget />
+      <PWAInstallPrompt />
     </div>
   );
 }

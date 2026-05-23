@@ -1,0 +1,46 @@
+{
+  "summary": "Major iteration 2 (PWA + JWT auth + 12 luxury services) tested end-to-end. Backend: 26/27 pytest pass (1 fail: brute-force lockout). Frontend: home + 12 services + QR card + login/register/portal flow + admin protection + availability calendar slot → booking-form prefill all working. PWA manifest + service worker reachable. Chat returns 503 gracefully (LLM budget).",
+  "backend_issues": {
+    "critical": [
+      {
+        "endpoint": "POST /api/auth/login (brute-force protection)",
+        "issue": "Lockout key is `{request.client.host}:{email}`. Behind k8s ingress, requests round-robin between two proxy IPs (e.g. 10.208.130.77 and 10.208.130.78), so each IP only accumulates 2-3 fails out of 5 needed. Verified in mongo login_attempts: distinct identifier docs per proxy IP. A real attacker would never be rate-limited reliably from a single client. Fix: respect X-Forwarded-For (first IP), or key by email only, or by (X-Forwarded-For + email).",
+        "priority": "HIGH"
+      }
+    ],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/backend_test.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [
+    "Fix brute-force lockout to use X-Forwarded-For (or email-only key) so it survives multi-proxy k8s ingress. Current implementation lets 10+ wrong logins through before any lock.",
+    "Optional: add `data-testid` attributes for availability-date / slot buttons / continue-to-booking / login fields. Tests had to fall back to text/role selectors. Not blocking but slows future regression."
+  ],
+  "critical_code_review_comments": [
+    "server.py brute-force key uses `request.client.host` which is the immediate proxy IP, not the real client. Behind any load balancer this silently disables the protection.",
+    "POST /api/auth/refresh sets only access_token but does not rotate refresh_token — acceptable but worth documenting.",
+    "PATCH /api/bookings/{id} still takes status as query param; client-cancel logic looks correct but consider moving to a body-validated enum.",
+    "server.py uses deprecated @app.on_event('startup'/'shutdown'); migrate to lifespan handlers.",
+    "Frontend AvailabilityCalendar + Booking communicate via sessionStorage + custom event (`cla:prefill`). Works, but a shared React context or query-string approach would be more testable and SEO-friendly."
+  ],
+  "updated_files": [
+    "/app/backend/tests/backend_test.py"
+  ],
+  "success_rate": {
+    "backend": "96% (26/27 pytest)",
+    "frontend": "100% of tested flows (home, login, register, portal, admin protection, availability→booking prefill, sign-out, footer QR, PWA assets)"
+  },
+  "test_credentials": "Admin cinthia@claaesthetics.com / ChangeMe2026! works. New test clients are registered ad-hoc via /api/auth/register in tests (TEST_ prefix in name).",
+  "seed_data_creation": "Pytest created ~6 TEST_ prefixed bookings and several short-lived client accounts (test_client_*@test.com). Also one UI-registered client (ui_<ts>@example.com). All visible in admin dashboard.",
+  "retest_needed": true,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Backend tests at /app/backend/tests/backend_test.py — 27 cases covering auth (login/register/me/logout), admin protection (bookings/leads), availability (weekday+Sunday+invalid), booking double-booking 409, client cancel own / cannot cancel others / cannot confirm, brute-force, PWA manifest+sw, chat 503/200 fallback. Re-run after main agent fixes brute-force. Frontend selectors used text-based fallbacks for slot buttons & continue — adding data-testid would help.",
+  "rca of the issue": "Brute-force lockout failing in production: backend uses request.client.host as part of the identifier, but k8s ingress forwards requests through multiple proxy pods (verified IPs 10.208.130.77 / .78 in login_attempts collection). Each proxy IP accumulates its own count, so reaching the 5-fail threshold from a single browser/attacker takes 10+ attempts. Reproduction: 6 wrong logins from one session return 401, 401, 401, 401, 401, 401 instead of the expected …, 401, 429. Mitigation: read first IP from X-Forwarded-For header (FastAPI: request.headers.get('x-forwarded-for','').split(',')[0].strip()) or drop the IP component and key by email only."
+}

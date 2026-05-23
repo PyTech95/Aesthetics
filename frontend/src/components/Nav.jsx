@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, User, LogOut } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 import { BRAND, NAV_LINKS } from "@/lib/content";
 import { scrollToId } from "@/lib/hooks";
+import { useAuth } from "@/contexts/AuthContext";
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const { user, logout } = useAuth();
+  const nav = useNavigate();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -55,7 +59,38 @@ export default function Nav() {
           ))}
         </nav>
 
-        <div className="hidden md:block">
+        <div className="hidden md:flex items-center gap-3">
+          {user && typeof user === "object" ? (
+            <div className="flex items-center gap-2">
+              <Link
+                to={user.role === "admin" ? "/admin" : "/portal"}
+                data-testid="nav-account"
+                className="inline-flex items-center gap-2 rounded-full border border-[#2C2A29]/25 text-[#2C2A29] px-4 py-2.5 text-[11px] uppercase tracking-[0.22em] hover:border-[#D4AF37] hover:text-[#B8932E] transition-colors"
+              >
+                <User className="h-3.5 w-3.5" strokeWidth={1.5} />
+                {user.role === "admin" ? "Dashboard" : "My portal"}
+              </Link>
+              <button
+                onClick={async () => {
+                  await logout();
+                  nav("/");
+                }}
+                data-testid="nav-logout"
+                aria-label="Sign out"
+                className="h-10 w-10 grid place-items-center rounded-full border border-[#2C2A29]/20 text-[#5C5A59] hover:border-[#D4AF37] hover:text-[#B8932E] transition-colors"
+              >
+                <LogOut className="h-4 w-4" strokeWidth={1.5} />
+              </button>
+            </div>
+          ) : (
+            <Link
+              to="/login"
+              data-testid="nav-signin"
+              className="text-[12px] uppercase tracking-[0.22em] text-[#5C5A59] hover:text-[#2C2A29] transition-colors"
+            >
+              Sign in
+            </Link>
+          )}
           <button
             data-testid="nav-book-now"
             onClick={() => handleNav("contact")}
@@ -122,6 +157,26 @@ export default function Nav() {
                 >
                   Book Your Session
                 </button>
+                {user && typeof user === "object" ? (
+                  <Link
+                    to={user.role === "admin" ? "/admin" : "/portal"}
+                    onClick={() => setOpen(false)}
+                    data-testid="mobile-nav-account"
+                    className="w-full inline-flex items-center justify-center gap-2 mt-3 rounded-full border border-[#2C2A29]/25 text-[#2C2A29] py-3.5 text-[12px] tracking-[0.22em] uppercase"
+                  >
+                    <User className="h-4 w-4" strokeWidth={1.5} />
+                    {user.role === "admin" ? "Dashboard" : "My portal"}
+                  </Link>
+                ) : (
+                  <Link
+                    to="/login"
+                    onClick={() => setOpen(false)}
+                    data-testid="mobile-nav-signin"
+                    className="w-full inline-flex items-center justify-center mt-3 rounded-full border border-[#2C2A29]/25 text-[#2C2A29] py-3.5 text-[12px] tracking-[0.22em] uppercase"
+                  >
+                    Sign in
+                  </Link>
+                )}
               </div>
             </SheetContent>
           </Sheet>

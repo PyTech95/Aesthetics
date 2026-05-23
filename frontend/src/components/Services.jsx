@@ -3,16 +3,18 @@ import { SERVICES } from "@/lib/content";
 import { scrollToId } from "@/lib/hooks";
 
 const CATEGORY_IMG = {
+  Injectables:
+    "https://images.unsplash.com/photo-1583241800698-9c2e6f0a35a4?auto=format&fit=crop&w=1200&q=80",
+  Lifts:
+    "https://images.unsplash.com/photo-1559599101-f09722fb4948?auto=format&fit=crop&w=900&q=80",
   Facials:
     "https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&w=1200&q=80",
-  "Advanced Skin":
-    "https://images.unsplash.com/photo-1631730486572-226d1f595b68?auto=format&fit=crop&w=900&q=80",
-  "Body Treatments":
-    "https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&w=900&q=80",
-  Massage:
-    "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=900&q=80",
-  Memberships:
-    "https://images.unsplash.com/photo-1583416750470-965b2707b355?auto=format&fit=crop&w=900&q=80",
+  Skin:
+    "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=900&q=80",
+  Hair:
+    "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=900&q=80",
+  Wellness:
+    "https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&w=900&q=80",
 };
 
 export default function Services() {
@@ -51,6 +53,21 @@ export default function Services() {
             <ArrowUpRight className="h-4 w-4" strokeWidth={1.5} />
           </button>
         </div>
+
+        {/* Luxury treatments flyer */}
+        <a
+          href="https://customer-assets.emergentagent.com/job_luxury-spa-preview-1/artifacts/j6c024fe_009%20%281%29.png"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-testid="services-flyer"
+          className="mt-10 block rounded-3xl overflow-hidden border border-[#E5E1D8] bg-white hover-lift group"
+        >
+          <img
+            src="https://customer-assets.emergentagent.com/job_luxury-spa-preview-1/artifacts/j6c024fe_009%20%281%29.png"
+            alt="CLA Luxury Treatments — Modern luxury, refined results"
+            className="w-full h-auto object-contain"
+          />
+        </a>
 
         {/* Bento Grid */}
         <div className="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">

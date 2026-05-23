@@ -63,6 +63,19 @@ export default function Footer() {
               <Facebook className="h-4 w-4" strokeWidth={1.5} />
             </a>
           </div>
+
+          {/* QR for mobile booking */}
+          <div className="mt-7 inline-flex items-center gap-3 rounded-2xl bg-white/5 border border-white/10 p-3 pr-5">
+            <img
+              src="https://customer-assets.emergentagent.com/job_luxury-spa-preview-1/artifacts/uh5zkul7_qr-code.png"
+              alt="Scan to book"
+              className="h-16 w-16 rounded-md bg-white p-1.5"
+            />
+            <div>
+              <p className="text-[10px] uppercase tracking-[0.28em] text-[#D4AF37]">Scan to book</p>
+              <p className="mt-1 font-serif-display text-base">Open CLA on your phone</p>
+            </div>
+          </div>
         </div>
 
         <div className="lg:col-span-3">
