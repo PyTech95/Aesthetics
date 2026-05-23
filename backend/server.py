@@ -15,7 +15,7 @@ import uuid
 from datetime import datetime, timezone, timedelta, date
 import bcrypt
 import jwt
-from emergentintegrations.llm.chat import LlmChat, UserMessage
+
 
 
 # ---------------- Config ----------------
