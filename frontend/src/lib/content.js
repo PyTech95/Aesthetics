@@ -138,6 +138,16 @@ export const SERVICES = [
     duration: "Consultation",
     price: "From $299",
   },
+  {
+    id: "body-spa",
+    category: "Body Spa",
+    name: "Body Spa",
+    description:
+      "A serene full-body spa experience — massage, body rituals and signature finishing touches. Launching soon at CLA.",
+    duration: "Coming soon",
+    price: "Coming soon",
+    comingSoon: true,
+  },
 ];
 
 export const GALLERY = [

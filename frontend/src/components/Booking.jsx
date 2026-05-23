@@ -316,7 +316,7 @@ export default function Booking() {
                   <SelectValue placeholder="Choose a treatment" />
                 </SelectTrigger>
                 <SelectContent className="bg-[#FAF9F6] border-[#E5E1D8]">
-                  {SERVICES.map((s) => (
+                  {SERVICES.filter((s) => !s.comingSoon).map((s) => (
                     <SelectItem
                       key={s.id}
                       value={s.name}
