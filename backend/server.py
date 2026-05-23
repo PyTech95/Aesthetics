@@ -291,8 +291,10 @@ async def register(payload: RegisterIn, response: Response):
 @api_router.post("/auth/login", response_model=UserOut)
 async def login(payload: LoginIn, response: Response, request: Request):
     email = payload.email.lower()
-    ip = request.client.host if request.client else "unknown"
-    identifier = f"{ip}:{email}"
+    # Use first IP from X-Forwarded-For (real client) — fall back to request.client.host
+    xff = request.headers.get("x-forwarded-for", "")
+    real_ip = xff.split(",")[0].strip() if xff else (request.client.host if request.client else "unknown")
+    identifier = f"{real_ip}:{email}"
 
     attempt = await db.login_attempts.find_one({"identifier": identifier})
     if attempt and attempt.get("locked_until"):
